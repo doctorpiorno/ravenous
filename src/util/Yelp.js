@@ -7,29 +7,25 @@ const Yelp = {
         Authorization: `Bearer ${apiKey}`
         }
       }).then(response => {
-        //Note to self: Don't forget the "()" after response.json.
+        //Note to self: Don't forget the "()" after response.json
         return response.json();
       }).then(jsonResponse => {
         if (jsonResponse.businesses) {
-          return jsonResponse.businesses.map(business => {
-            const output = {
-              id: business.id,
-              imageSrc: business.image_url,
-              name: business.name,
-              address: business.location.address1 + business.location.address2 + business.location.address3,
-              city: business.location.city,
-              state: business.location.state,
-              zipCode: business.location.zip_code,
-              category: business.categories[0].title,
-              rating: business.rating,
-              reviewCount: business.review_count
-            }
-            console.log(output);
-            return output;
-          });
-        }
-      });
-    }
-  }
+          return jsonResponse.businesses.map(business => ({ //Note to self: The opening bracket before { is necessary because...?
+            id: business.id,
+            imageSrc: business.image_url,
+            name: business.name,
+            address: business.location.address1 + business.location.address2 + business.location.address3,
+            city: business.location.city,
+            state: business.location.state,
+            zipCode: business.location.zip_code,
+            category: business.categories[0].title,
+            rating: business.rating,
+            reviewCount: business.review_count
+          }));
+          }
+        });
+      }
+    };
 
 export default Yelp;
