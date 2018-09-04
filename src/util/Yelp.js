@@ -11,7 +11,7 @@ const Yelp = {
         return response.json();
       }).then(jsonResponse => {
         if (jsonResponse.businesses) {
-          return jsonResponse.businesses.map(business => ({ //Note to self: The opening bracket before { is necessary because...?
+          return jsonResponse.businesses.map(business => ({ //Note to self: The opening bracket before { in the line below is necessary because...?
             id: business.id,
             imageSrc: business.image_url,
             name: business.name,
